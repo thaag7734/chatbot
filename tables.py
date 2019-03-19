@@ -1,12 +1,9 @@
 greeting = 'Hello user! My name is Big Sad.'
 
 responses = {
-	'jesus': 'God is dead.',
-	'christ': 'God is dead.',
-	'god': 'God is dead.',
+	'what is the (meaning|purpose|reason) (of|for) (life|living|being alive)': '42',
 	'my name is ': 'Well hi there %s!',
-	'my favorite food is': 'My favourite food is the souls of my enemies. But you do you, I guess.',
-	'my favourite food is': 'My favourite food is the souls of my enemies. But you do you, I guess.'
+	'my favo(?:u)?rite food is ': 'My favourite food is the souls of my enemies. But %s is cool too, I guess.'
 }
 
-random = ['Hmm.', 'Oh?', 'Tell me more.']
+random = ['Hmm.', 'Oh?', 'Tell me more.', 'I see what you mean.', 'What is your favourite colour?', 'What is your favourite food?', 'What is your favourite movie?']
