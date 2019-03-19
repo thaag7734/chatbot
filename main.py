@@ -28,21 +28,21 @@ def respond(userSaid):
 		engine.runAndWait()
 		matched = True
 	elif foodmatch:
-		favouriteFood = 'You told me that your favourite food is %s.' % re.search('my favo(?:u)rite food is (.*?)([^a-zA-Z0-9_ -]|$)', userSaid, re.IGNORECASE).group(1)
+		favouriteFood = 'You told me that your favourite food is %s' % re.search('my favo(?:u)?rite food is (.*?)([^a-zA-Z0-9_ -]|$)', userSaid, re.IGNORECASE).group(1)
 	elif whatmovie:
 		print(favouriteMovie)
 		engine.say(favouriteMovie)
 		engine.runAndWait()
 		matched = True
 	elif moviematch:
-		favouriteMovie = 'You told me that your favourite movie is %s.' % re.sub('my favo(?:u)rite movie is (.*?)([^a-zA-Z0-9_ -]|$)', userSaid, re.IGNORECASE).group(1)
+		favouriteMovie = 'You told me that your favourite movie is %s' % re.search('my favo(?:u)?rite movie is (.*?)([^a-zA-Z0-9_ -]|$)', userSaid, re.IGNORECASE).group(1)
 	elif whatcolour:
 		print(favouriteColour)
 		engine.say(favouriteColour)
 		engine.runAndWait()
 		matched = True
 	elif colourmatch:
-		favouriteColour = 'You told me that your favourite colour is %s.' % re.sub('my favo(?:u)?rite colo(?:u)?r is (.*?)([^a-zA-Z0-9_ -]|$)', userSaid, re.IGNORECASE).group(1)
+		favouriteColour = 'You told me that your favourite colour is %s' % re.search('my favo(?:u)?rite colo(?:u)?r is (.*?)([^a-zA-Z0-9_ -]|$)', userSaid, re.IGNORECASE).group(1)
 	
 	for key in tables.responses.keys():
 
