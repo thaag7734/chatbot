@@ -2,6 +2,8 @@ import pyttsx3
 import random
 import tables
 import re
+import platform
+import os
 
 engine = pyttsx3.init()
 
@@ -21,6 +23,7 @@ def respond(userSaid):
 	moviematch = re.search('my favo(?:u)?rite movie is ', userSaid, re.IGNORECASE)
 	whatcolour = re.search('(what is|what(?:\')?s) my favo(?:u)?rite colour', userSaid, re.IGNORECASE)
 	colourmatch = re.search('my favo(?:u)?rite colo(?:u)?r is ', userSaid, re.IGNORECASE)
+	tutorial = re.search('how (?:do|can) (?:i|you) (.+)', userSaid, re.IGNORECASE)
 
 	if whatfood:
 		print(favouriteFood)
@@ -28,29 +31,37 @@ def respond(userSaid):
 		engine.runAndWait()
 		matched = True
 	elif foodmatch:
-		favouriteFood = 'You told me that your favourite food is %s' % re.search('my favo(?:u)?rite food is (.*?)([^a-zA-Z0-9_ -]|$)', userSaid, re.IGNORECASE).group(1)
+		favouriteFood = 'You told me that your favourite food is %s' % re.search('my favo(?:u)?rite food is (.*?)([^a-z0-9_ -]|$)', userSaid, re.IGNORECASE).group(1)
 	elif whatmovie:
 		print(favouriteMovie)
 		engine.say(favouriteMovie)
 		engine.runAndWait()
 		matched = True
 	elif moviematch:
-		favouriteMovie = 'You told me that your favourite movie is %s' % re.search('my favo(?:u)?rite movie is (.*?)([^a-zA-Z0-9_ -]|$)', userSaid, re.IGNORECASE).group(1)
+		favouriteMovie = 'You told me that your favourite movie is %s' % re.search('my favo(?:u)?rite movie is (.*?)([^a-z0-9_ -]|$)', userSaid, re.IGNORECASE).group(1)
 	elif whatcolour:
 		print(favouriteColour)
 		engine.say(favouriteColour)
 		engine.runAndWait()
 		matched = True
 	elif colourmatch:
-		favouriteColour = 'You told me that your favourite colour is %s' % re.search('my favo(?:u)?rite colo(?:u)?r is (.*?)([^a-zA-Z0-9_ -]|$)', userSaid, re.IGNORECASE).group(1)
+		favouriteColour = 'You told me that your favourite colour is %s' % re.search('my favo(?:u)?rite colo(?:u)?r is (.*?)([^a-z0-9_ -]|$)', userSaid, re.IGNORECASE).group(1)
+	elif tutorial:
+		topic = tutorial.group(1).replace(' ','-')
+		system = platform.system()
+		if system == 'Windows': os.system('start "" https://www.wikihow.com/%s' % topic)
+		elif system == 'Darwin': os.system('open "" https://www.wikihow.com/%s' % topic)
+		elif system == 'Linux': os.system('xdg-open "" https://www.wikihow.com/%s' % topic)
+		else: webbrowser.open('https://www.wikihow.com/%s' % topic)
+
 	
 	for key in tables.responses.keys():
 
 		match = re.search(key, userSaid, re.IGNORECASE)
 		if match:
 			if '%s' in tables.responses[key]:
-				print(tables.responses[key] % re.sub(key, '', userSaid, flags=re.IGNORECASE))
-				engine.say(tables.responses[key] % re.sub(key, '', userSaid, flags=re.IGNORECASE))
+				print(tables.responses[key] % re.search(key, userSaid, re.IGNORECASE).group(1))
+				engine.say(tables.responses[key] % re.search(key, userSaid, re.IGNORECASE).group(1))
 			else:
 				print(tables.responses[key])
 				engine.say(tables.responses[key])
