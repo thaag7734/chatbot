@@ -60,10 +60,10 @@ def respond(userSaid):
 		if match:
 			if '%s' in tables.responses[key]:
 				keywords = re.search(key, userSaid, re.IGNORECASE).group(1)
-				if tables.responses[key][-1] not in '!,.?':
-					if keywords[-1] in '.,?!':
-						keywords = keywords[:-1] + '.'
-					else:
+				if keywords[-1] in '.,?!':
+					keywords = keywords[:-1] + '.'
+				else:
+					if tables.responses[key][-1] not in '.,?!':
 						keywords += '.'
 				print(tables.responses[key] % keywords)
 				engine.say(tables.responses[key] % keywords)
@@ -72,8 +72,8 @@ def respond(userSaid):
 				engine.say(tables.responses[key])
 			engine.runAndWait()
 			matched = True
-	if matched:
-		return getInput()
+		if matched:
+			return getInput()
 	return respondRandom()
 
 def respondRandom():
