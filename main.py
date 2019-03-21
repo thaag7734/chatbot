@@ -4,6 +4,7 @@ import tables
 import re
 import platform
 import os
+import requests
 
 engine = pyttsx3.init()
 
@@ -49,10 +50,17 @@ def respond(userSaid):
 	elif tutorial:
 		topic = tutorial.group(1).replace(' ','-')
 		system = platform.system()
-		if system 	== 'Windows': os.system('start "" https://www.wikihow.com/%s' % topic)
-		elif system == 'Darwin': os.system('open "" https://www.wikihow.com/%s' % topic)
-		elif system == 'Linux': os.system('xdg-open "" https://www.wikihow.com/%s' % topic)
-		else: webbrowser.open('https://www.wikihow.com/%s' % topic)
+		r = requests.get('https://www.wikihow.com/%s' % topic)
+		if 'Oops! The page you requested doesn’t seem to exist.' in r.text:
+			if system 	== 'Windows': os.system('start "" https://www.wikihow.com/wikiHowTo?search=%s' % topic)
+			elif system == 'Darwin': os.system('open "" https://www.wikihow.com/wikiHowTo?search=%s' % topic)
+			elif system == 'Linux': os.system('xdg-open "" https://www.wikihow.com/wikiHowTo?search=%s' % topic)
+			else: webbrowser.open('https://www.wikihow.com/wikiHowTo?search=%s' % topic)
+		else:
+			if system 	== 'Windows': os.system('start "" https://www.wikihow.com/%s' % topic)
+			elif system == 'Darwin': os.system('open "" https://www.wikihow.com/%s' % topic)
+			elif system == 'Linux': os.system('xdg-open "" https://www.wikihow.com/%s' % topic)
+			else: webbrowser.open('https://www.wikihow.com/%s' % topic)
 
 	
 	for key in tables.responses.keys():
