@@ -11,6 +11,8 @@ responses = {
 	'(?:what is|what(?:\')?s) (?:yo)?ur favo(?:u)?rite (.+)': 'I don\'t know what a %s is.',
 	'(?:what(?:\'s| is) the (?:meaning|purpose|reason) (?:of|for) (?:life|living|being alive)|why (?:are|am|is) (?:we|i|(?:(?:yo)?u|ya)|me) (?:alive|here))': '42',
 	'i (?:like|enjoy)(?: to)? (.+)': '%s sounds interesting. Tell me more.',
+	'(?:(?:cinnamon|sweet)(?: )?roll|fallout (?:3|three))': 'Let me guess. Someone stole your sweetroll.',
+	'(?:arrow|knee|adventure)': 'I used to be an adventurer like you, but then I took an arrow to the knee.',
 	'(?:mom|dad|father|mother|parent|parents)': 'Please, tell me some more about your parents.',
 	'(?:what languages (?:do|can) (?:(?:yo)?u|ya) speak|(?:do|can) (?:(?:yo)?u|ya) speak(?: any)? other language(?:s)?)': 'Tyler is lazy and doesn\'t pay attention in Spanish class, so I can only speak English.',
 	'how (?:do|can) (?:i|(?:(?:yo)?u|ya)) (.+)': 'I\'m opening a WikiHow article about how to %s for you.',
